@@ -2,7 +2,7 @@ version 1.0
 
 workflow WriteVCFWorkflow {
     input {
-        String matrix_table
+        String vds
         String samples_list
         String chr = "ALL"
         String output_prefix
@@ -10,7 +10,7 @@ workflow WriteVCFWorkflow {
 
     call WriteVCFTask {
         input:
-            matrix_table = matrix_table,
+            vds = vds,
             samples_list = samples_list,
             chr = chr,
             output_prefix = output_prefix
@@ -30,7 +30,7 @@ workflow WriteVCFWorkflow {
 
 task WriteVCFTask {
     input {
-        String matrix_table
+        String vds
         String samples_list
         String chr
         String output_prefix
@@ -51,7 +51,7 @@ task WriteVCFTask {
         curl -O https://raw.githubusercontent.com/jonnguye/VDStoVCF/main/write_vcf.py
 
         python3 write_vcf.py \
-            --matrix_table "~{matrix_table}" \
+            --vds "~{vds}" \
             --samples_list "~{samples_list}" \
             --chr "~{chr}" \
             --output_prefix "~{output_prefix}" \
