@@ -11,8 +11,6 @@ def write_vcf(inputs):
 
     vds = hl.vds.filter_samples(vds, samples_table, keep=True)
 
-    print(f"Filtering to {mt.count_cols()} samples")
-
     #SELECT WHICH CHROMOSOME TO FILTER BY
 
     if inputs['chr'] is None or inputs['chr'].upper() == 'ALL':
