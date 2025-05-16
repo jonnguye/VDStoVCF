@@ -33,7 +33,6 @@ if __name__ == "__main__":
     parser.add_argument("--matrix_table", required=True)
     parser.add_argument("--samples_list", required=True)
     parser.add_argument("--chr", required=True)
-    parser.add_argument("--MinimumAC_inclusive", type=int, required=True)
     parser.add_argument("--output_prefix", required=True)
 
     args = parser.parse_args()
@@ -42,7 +41,6 @@ if __name__ == "__main__":
         'matrix_table': args.matrix_table,
         'samples_list': args.samples_list,
         'chr': args.chr,
-        'MinimumAC_inclusive': args.MinimumAC_inclusive,
         'output_prefix': args.output_prefix,
     }
 
