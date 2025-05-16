@@ -18,7 +18,7 @@ def write_vcf(inputs):
         print(f"CHR value provided: {inputs['chr']}")
     else:
         print(f"Filtering on {inputs['chr']}")
-        vds = hl.vds_filter_chromosomes(vds, keep=inputs['chr'])
+        vds = hl.vds.filter_chromosomes(vds, keep=inputs['chr'])
 
     #filter for biallelic
     vds = vds.filter_rows(vds.alleles.length() == 2)
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--vds", required=True)
     parser.add_argument("--samples_list", required=True)
-    parser.add_argument("--chr", required=True)
+    parser.add_argument("--chr", required=False)
     parser.add_argument("--output_prefix", required=True)
 
     args = parser.parse_args()
