@@ -30,7 +30,7 @@ def write_vcf(inputs):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--matrix_table", required=True)
+    parser.add_argument("--vds", required=True)
     parser.add_argument("--samples_list", required=True)
     parser.add_argument("--chr", required=True)
     parser.add_argument("--output_prefix", required=True)
@@ -38,7 +38,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     inputs = {
-        'matrix_table': args.matrix_table,
+        'vds': args.vds,
         'samples_list': args.samples_list,
         'chr': args.chr,
         'output_prefix': args.output_prefix,
