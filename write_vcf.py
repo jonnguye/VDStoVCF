@@ -23,7 +23,7 @@ def write_vcf(inputs):
     #filter for biallelic
     #vds = vds.filter_rows(vds.alleles.length() == 2)
 
-    mt = hl.vds.to_dense_mt(vds, reference_genome='GRCh38')
+    mt = hl.vds.to_dense_mt(vds)
     hl.export_vcf(mt, f"{inputs['output_prefix']}.vcf.bgz")
 
 if __name__ == "__main__":
