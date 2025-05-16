@@ -5,7 +5,6 @@ workflow WriteVCFWorkflow {
         String matrix_table
         String samples_list
         String chr = "ALL"
-        Int MinimumAC_inclusive = 5
         String output_prefix
     }
 
@@ -14,7 +13,6 @@ workflow WriteVCFWorkflow {
             matrix_table = matrix_table,
             samples_list = samples_list,
             chr = chr,
-            MinimumAC_inclusive = MinimumAC_inclusive,
             output_prefix = output_prefix
     }
 
@@ -35,7 +33,6 @@ task WriteVCFTask {
         String matrix_table
         String samples_list
         String chr
-        Int MinimumAC_inclusive
         String output_prefix
     }
 
