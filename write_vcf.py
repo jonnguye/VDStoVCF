@@ -4,12 +4,13 @@ import os
 
 def write_vcf(inputs):
     #LOAD TABLES AND FIND SUBSET
-    mt = hl.read_matrix_table(inputs['matrix_table'])
+    vds = hl.vds.read_vds(inputs['vds'])
     samples_table = hl.import_table(inputs['samples_list'], no_header=True)
     samples_table = samples_table.rename({'f0': 's'})
     samples_table = samples_table.key_by('s')
-    
-    mt = mt.filter_cols(hl.is_defined(samples_table[mt.s]))
+
+    vds = hl.vds.filter_samples(vds, samples_table, keep=True)
+
     print(f"Filtering to {mt.count_cols()} samples")
 
     #SELECT WHICH CHROMOSOME TO FILTER BY
@@ -19,8 +20,12 @@ def write_vcf(inputs):
         print(f"CHR value provided: {inputs['chr']}")
     else:
         print(f"Filtering on {inputs['chr']}")
-        mt = mt.filter_rows( (mt.locus.contig == inputs['chr']) )
-    
+        vds = hl.vds_filter_chromosomes(vds, keep=inputs['chr'])
+
+    #filter for biallelic
+    vds = vds.filter_rows(vds.alleles.length() == 2)
+
+    mt = hl.vds.to_dense_mt(vds, reference_genome='GRCh38')
     hl.export_vcf(mt, f"{inputs['output_prefix']}.vcf.bgz")
 
 if __name__ == "__main__":
