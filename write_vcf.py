@@ -21,7 +21,7 @@ def write_vcf(inputs):
         vds = hl.vds.filter_chromosomes(vds, keep=inputs['chr'])
 
     #filter for biallelic
-    vds = vds.filter_rows(vds.alleles.length() == 2)
+    #vds = vds.filter_rows(vds.alleles.length() == 2)
 
     mt = hl.vds.to_dense_mt(vds, reference_genome='GRCh38')
     hl.export_vcf(mt, f"{inputs['output_prefix']}.vcf.bgz")
